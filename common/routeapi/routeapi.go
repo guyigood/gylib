@@ -1,9 +1,9 @@
 package routeapi
 
 import (
-	"gylib/common/datatype"
-	"gylib/common/rediscomm"
-	"gylib/common/webclient"
+	"github.com/guyigood/gylib/common/datatype"
+	"github.com/guyigood/gylib/common/rediscomm"
+	"github.com/guyigood/gylib/common/webclient"
 	"strings"
 )
 

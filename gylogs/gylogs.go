@@ -2,8 +2,8 @@ package gylogs
 
 import (
 	"fmt"
-	"gylib/common"
-	"gylib/common/datatype"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/common/datatype"
 	"os"
 	"time"
 )

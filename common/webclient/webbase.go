@@ -5,7 +5,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"gylib/common/datatype"
+	"github.com/guyigood/gylib/common/datatype"
 	"io/ioutil"
 	"net"
 	"net/http"

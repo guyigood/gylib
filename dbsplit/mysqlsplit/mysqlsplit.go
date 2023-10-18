@@ -1,7 +1,7 @@
 package mysqlsplit
 
 import (
-	"gylib/gydblib"
+	"github.com/guyigood/gylib/gydblib"
 	"strings"
 	"time"
 )

@@ -3,9 +3,9 @@ package oracledb
 import (
 	"database/sql"
 	"fmt"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/common/datatype"
 	_ "github.com/mattn/go-oci8"
-	"gylib/common"
-	"gylib/common/datatype"
 	"strconv"
 	"strings"
 	"sync"

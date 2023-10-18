@@ -2,7 +2,7 @@ package baiduai
 
 import (
 	"fmt"
-	"gylib/common/datatype"
+	"github.com/guyigood/gylib/common/datatype"
 )
 
 type IocrInput struct {

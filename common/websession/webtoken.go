@@ -2,9 +2,9 @@ package websession
 
 import (
 	"encoding/json"
-	"gylib/common"
-	"gylib/common/datatype"
-	"gylib/common/redisclient"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/common/datatype"
+	"github.com/guyigood/gylib/common/redisclient"
 	"sync"
 )
 

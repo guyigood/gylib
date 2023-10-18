@@ -1,8 +1,8 @@
 package token
 
 import (
-	"gylib/common"
-	"gylib/common/rediscomm"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/common/rediscomm"
 	"sync"
 )
 

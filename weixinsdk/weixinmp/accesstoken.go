@@ -2,8 +2,8 @@ package weixinmp
 
 import (
 	"encoding/json"
-	"gylib/common/datatype"
-	"gylib/common/redispack"
+	"github.com/guyigood/gylib/common/datatype"
+	"github.com/guyigood/gylib/common/redispack"
 	"io/ioutil"
 	"net/http"
 	"time"

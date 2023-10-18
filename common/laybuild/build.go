@@ -2,8 +2,8 @@ package laybuild
 
 import (
 	"fmt"
-	"gylib/common"
-	"gylib/gydblib"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/gydblib"
 	"io/ioutil"
 	"os"
 	"strings"

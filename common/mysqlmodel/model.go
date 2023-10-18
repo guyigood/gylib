@@ -2,7 +2,7 @@ package mysqlmodel
 
 import (
 	"fmt"
-	"gylib/gydblib"
+	"github.com/guyigood/gylib/gydblib"
 	"strings"
 )
 

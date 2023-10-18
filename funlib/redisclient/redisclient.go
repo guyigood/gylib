@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/garyburd/redigo/redis"
-	"gylib/common/datatype"
+	"github.com/guyigood/gylib/common/datatype"
 	"time"
 )
 

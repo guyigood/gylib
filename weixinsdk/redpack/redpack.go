@@ -2,8 +2,8 @@ package redpack
 
 import (
 	"fmt"
-	"gylib/common"
-	"gylib/weixinsdk/wxpay"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/weixinsdk/wxpay"
 )
 
 type WxHongBao struct {

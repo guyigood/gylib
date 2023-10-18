@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/garyburd/redigo/redis"
-	"gylib/common/datatype"
-	"gylib/common/redispack"
+	"github.com/guyigood/gylib/common/datatype"
+	"github.com/guyigood/gylib/common/redispack"
 )
 
 type RedisComm struct {

@@ -2,8 +2,8 @@ package redispack
 
 import (
 	"github.com/garyburd/redigo/redis"
-	"gylib/common"
-	"gylib/common/datatype"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/common/datatype"
 	"time"
 )
 

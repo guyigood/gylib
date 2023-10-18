@@ -1,4 +1,4 @@
-module gylib
+module github.com/guyigood/gylib
 
 go 1.17
 

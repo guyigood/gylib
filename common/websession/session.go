@@ -3,10 +3,10 @@ package websession
 import (
 	"encoding/json"
 	"errors"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/common/datatype"
+	"github.com/guyigood/gylib/common/redisclient"
 	"github.com/satori/go.uuid"
-	"gylib/common"
-	"gylib/common/datatype"
-	"gylib/common/redisclient"
 	"net/http"
 	"sync"
 	"time"

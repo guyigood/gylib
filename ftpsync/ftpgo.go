@@ -2,8 +2,8 @@ package ftpsync
 
 import (
 	"fmt"
+	"github.com/guyigood/gylib/common"
 	"github.com/jlaffaye/ftp"
-	"gylib/common"
 	"os"
 	"path/filepath"
 	"strings"

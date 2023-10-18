@@ -2,9 +2,9 @@ package modelbuild
 
 import (
 	"fmt"
-	"gylib/common"
-	"gylib/common/mysqlmodel"
-	"gylib/gydblib"
+	"github.com/guyigood/gylib/common"
+	"github.com/guyigood/gylib/common/mysqlmodel"
+	"github.com/guyigood/gylib/gydblib"
 	"io/ioutil"
 	"os"
 	"strings"
