@@ -268,3 +268,34 @@ func (that *EsMod) MultiWildcardQuery(wildcard_data []map[string]string, Minimum
 	}
 	return ReData, total
 }
+
+func (that *EsMod) MultiFuzzinessQuery(fuzz_data []map[string]string) ([]map[string]string, int64) {
+	boolQuery := elastic.NewBoolQuery()
+	for _, val := range fuzz_data {
+		matchQuery := elastic.NewMatchQuery(val["fd_name"], val["fd_value"]).
+			Fuzziness("AUTO") // 启用自动模糊匹配
+
+		boolQuery.Should(matchQuery) // 使用 Should 将多个关键字的模糊查询组合在一起
+	}
+	searchResult, err := that.Client.Search().
+		Index(that.IndexName).
+		Query(boolQuery).
+		Do(context.Background())
+	if err != nil {
+		return nil, 0
+	}
+	total := searchResult.TotalHits()
+	if total == 0 {
+		return nil, 0
+	}
+
+	ReData := make([]map[string]string, 0)
+	// 处理搜索结果
+	for _, hit := range searchResult.Hits.Hits {
+		temp := make(map[string]string)
+		temp["data"] = fmt.Sprintf("%s", hit.Source)
+		ReData = append(ReData, temp)
+		// 处理其他字段数据
+	}
+	return ReData, total
+}
