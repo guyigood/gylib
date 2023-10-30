@@ -269,7 +269,7 @@ func (that *EsMod) MultiWildcardQuery(wildcard_data []map[string]string, Minimum
 	return ReData, total
 }
 
-func (that *EsMod) MultiFuzzinessQuery(fuzz_data []map[string]string) ([]map[string]string, int64) {
+func (that *EsMod) MultiFuzzinessQuery(fuzz_data []map[string]string, minimumShouldMatch int) ([]map[string]string, int64) {
 	boolQuery := elastic.NewBoolQuery()
 	for _, val := range fuzz_data {
 		matchQuery := elastic.NewMatchQuery(val["fd_name"], val["fd_value"]).
@@ -277,6 +277,7 @@ func (that *EsMod) MultiFuzzinessQuery(fuzz_data []map[string]string) ([]map[str
 
 		boolQuery.Should(matchQuery) // 使用 Should 将多个关键字的模糊查询组合在一起
 	}
+	boolQuery.MinimumNumberShouldMatch(minimumShouldMatch)
 	searchResult, err := that.Client.Search().
 		Index(that.IndexName).
 		Query(boolQuery).
@@ -286,6 +287,48 @@ func (that *EsMod) MultiFuzzinessQuery(fuzz_data []map[string]string) ([]map[str
 	}
 	total := searchResult.TotalHits()
 	if total == 0 {
+		return nil, 0
+	}
+
+	ReData := make([]map[string]string, 0)
+	// 处理搜索结果
+	for _, hit := range searchResult.Hits.Hits {
+		temp := make(map[string]string)
+		temp["data"] = fmt.Sprintf("%s", hit.Source)
+		ReData = append(ReData, temp)
+		// 处理其他字段数据
+	}
+	return ReData, total
+}
+
+func (that *EsMod) ComplexFuzzinessQuery(match_data, wildcard_data []map[string]string, MinimumShouldMatch int) ([]map[string]string, int64) {
+	var exactMatch []elastic.Query
+	var fuzzyMatch []elastic.Query
+	for _, val := range match_data {
+		temp := elastic.NewMatchQuery(val["fd_name"], val["fd_value"])
+		exactMatch = append(exactMatch, temp)
+	}
+	for _, val := range wildcard_data {
+		temp := elastic.NewMatchQuery(val["fd_name"], val["fd_value"]).
+			Fuzziness("AUTO")
+		fuzzyMatch = append(fuzzyMatch, temp)
+	}
+	// 使用 BoolQuery 构建复合查询
+	boolQuery := elastic.NewBoolQuery().
+		Must(exactMatch...).
+		Should(fuzzyMatch...).
+		MinimumNumberShouldMatch(MinimumShouldMatch)
+	searchResult, err := that.Client.Search().
+		Index(that.IndexName).
+		Query(boolQuery).
+		From((that.PageNo - 1) * that.PageSize).
+		Size(that.PageSize).
+		Do(that.Ctx)
+	if err != nil {
+		return nil, 0
+	}
+	total := searchResult.TotalHits()
+	if searchResult.TotalHits() == 0 {
 		return nil, 0
 	}
 
