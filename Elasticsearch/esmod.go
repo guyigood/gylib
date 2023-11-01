@@ -86,6 +86,17 @@ func (that *EsMod) UpdateDoc(id string) (*elastic.UpdateResponse, error) {
 	return data, nil
 }
 
+func (that *EsMod) DeleteDoc(id string) (*elastic.DeleteResponse, error) {
+	data, err := that.Client.Delete().
+		Index(that.IndexName).
+		Id(id).
+		Do(that.Ctx)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
 func (that *EsMod) CreateIndex() bool {
 	_, err := that.Client.CreateIndex(that.IndexName).Do(that.Ctx)
 	if err != nil {
