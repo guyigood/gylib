@@ -38,7 +38,7 @@ type Mysqlcon struct {
 }
 
 var G_Dbcon *Mysqlcon
-var tb_lock, fd_lock sync.RWMutex
+var tb_lock, fd_lock, dbmutex sync.RWMutex
 
 var G_dbtables map[string]interface{}
 var G_fd_list map[string]interface{}
@@ -123,6 +123,8 @@ func NewMySql_Server_DB(action string) *Mysqlcon {
 }
 
 func Get_New_Main_DB() *Mysqlcon {
+	dbmutex.Lock()
+	defer dbmutex.Unlock()
 	if G_Dbcon == nil {
 		G_Dbcon = NewMySql_Server_DB("")
 		G_Dbcon.Init_Redis_Struct()
